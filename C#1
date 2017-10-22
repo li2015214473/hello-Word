@@ -1,0 +1,153 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Car
+    {
+        const double pi = 3.14;      //定义常量圆周率pi  
+        //计算汽车轮子的面积（假设汽车轮子是圆形）
+        public double S(double r)
+        {
+            double s = 0;
+            s = pi * r * r;
+            return s;
+        }
+
+        //计算汽车行驶的时间
+        public double Time(double speed, double distance)
+        {
+            double time = 0;
+            if (speed >= 0)
+            {
+                time = distance / speed;
+            }
+            return time;
+        }
+
+        class Fea   //乘车费用（不打折）
+        {
+            public int num = 6;  //乘客数量
+            public int child = 2;  //乘客中小孩的数量
+            public double total = 0;
+            public void Money()
+            {
+                total = num * 50;
+                Console.WriteLine("计算不打折时的乘车收费：");
+                Console.WriteLine("乘客数：{0}-----总的乘车收费{1}", num, total);
+            }
+        }
+        ////继承于乘车费用类，重写方法Money()（小孩半价）
+        class Discount : Fea  
+        {
+            public void Money(int num,int child)
+            {
+                total = (num - child) * 50 + child * 25;
+                Console.WriteLine("计算小孩半价时的乘车收费：");
+                Console.WriteLine("乘客数：{0}；小孩数：{1}；总的乘车收费：{2}", num, child, total);
+            }
+        }
+        //定义结构体
+        struct ComplexNumber
+        {
+            public double r;
+            public double s;
+            public void Write()
+            {
+                Console.WriteLine("汽车轮子的半径和面积分别是：{0}，{1}", r, s);
+            }
+
+
+        }
+        //定义枚举类型
+        enum MyDate //使用enum创建枚举
+        {
+            Sun = 0,
+            Mon = 1,
+            Tue = 2,
+            Wed = 3,
+            Thi = 4,
+            Fri = 5,
+            Sat = 6
+        }
+        public static void Main(string[] args)
+        {
+        //定义简单类型：整形、实数类型、布尔型、字符型 ， 
+            int color = 1;
+            double speed = 60;
+            double distance = 120;
+            double time = 0;
+            float r = 2.0f;
+            char d = '个';
+            const double pi = 3.14;      //定义常量圆周率pi           
+            bool isMove = true;
+
+            //调用枚举类型
+            int k = (int)DateTime.Now.DayOfWeek;//获取代表星期几的返回值
+            switch(k)
+          {
+              case (int)MyDate.Sun:Console.WriteLine("今天是星期日"); break;
+              case (int)MyDate.Mon:Console.WriteLine("今天是星期一"); break;
+              case (int)MyDate.Tue:Console.WriteLine("今天是星期二"); break;
+              case (int)MyDate.Wed:Console.WriteLine("今天是星期三"); break;
+              case (int)MyDate.Thi:Console.WriteLine("今天是星期四"); break;
+              case (int)MyDate.Fri:Console.WriteLine("今天是星期五"); break;
+              case (int)MyDate.Sat:Console.WriteLine("今天是星期六"); break;
+            }
+            Console.WriteLine("-----------汽车的各项数据------------");
+
+            //创建数组
+            int[] a = new int[3] { 4, 2, 3 };
+            Console.WriteLine("汽车的长、宽、高分别为:  {0} * {1} * {2}",a[0],a[1],a[2]);
+           
+            //创建Car类的对象obj
+            Car obj = new Car();
+         //定义结构体
+            ComplexNumber wheel; //定义结构变量wheel
+            wheel.r = 2.5;   //汽车轮子的半径
+                             //调用类Car中的S（）方法，计算汽车轮子的面积
+            wheel.s = obj.S(wheel.r);
+            Console.WriteLine("汽车轮子的面积是：{0}", wheel.s);
+            if (isMove == true)
+            {
+                Console.WriteLine("汽车在行驶！！！");
+                time = obj.Time(speed, distance);
+                Console.WriteLine("汽车已经行驶的时间是：{0}", time);
+            }
+            else
+            {
+                Console.WriteLine("汽车不在行驶！！");
+            }
+
+            //类型转换
+            int w1 = 1;
+            double w2 = 2.5;
+            double w3 = w1;//隐式类型转换
+            int w4 = (int)w2;  //显式类型转换
+            Console.WriteLine("汽车司机的人数：{0}", w3);
+            Console.WriteLine("汽车售票员的人数：{0}", w4);
+            Console.WriteLine("-----------收费情况------------");
+            //引用类型之间的转换
+            Fea m = new Fea();
+            m.Money();
+            Discount n = new Discount();
+            n.Money(5,2);
+            Fea x = n ;   //隐式转换
+            x.Money();
+            Discount y = (Discount)x; //显示转换
+            //Discount y = (Discount)m;   //转换失败，有错误
+            y.Money(6,1);
+           
+        }
+
+
+
+
+    }
+}
+    
+
+
